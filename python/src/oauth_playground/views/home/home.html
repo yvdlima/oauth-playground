@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="OAuthPlayground.">
+    <style>
+        :root {
+            background-color: #2a2a2e;
+            color: rgb(249, 249, 250);
+        }
+
+        code {
+            display: block;
+            padding: 10px;
+            color: #463838;
+            background-color: #eee;
+            border: 1px solid #5e5e5e;
+        }
+
+        .invisible {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    {% if user %}
+    <div style='margin-bottom: 1em'>
+        <span> Hello {{ user['name'] }} ! </span>
+        <button><a href='/auth/logout'>Logout</a></button>
+    </div>
+
+    <div>
+        <pre>
+            <code id='json' class='invisible'>
+                {{ user_json }}
+            </code>
+        </pre>
+    </div>
+    {% else %}
+    <div>
+        <button><a href='/must_be_authorized'>Login</a></button>
+    </div>
+    {% endif %}
+</body>
+<script>
+    const code = document.getElementById('json');
+
+    code.innerText = JSON.stringify(JSON.parse(code.innerText), null, 4);
+    code.classList.remove('invisible');
+</script>
+
+</html>
